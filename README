@@ -6,25 +6,28 @@ Florian Hoenig
 
 1) ABOUT
 
-HeavyBoxes is a Javascript library adding physics to DOM elements using Box2D
-and HTML/CSS transforms (rotation).
+HeavyBoxes is a Javascript library adding physics to DOM elements using 
+Box2D and HTML/CSS transforms (rotation).
 
 Heavyboxes was written to implement "episode 1" for http://rianflo.com.
-The funny thing about having DOM nodes flying around is that you can still click, drag, select,
-submit a form or do whatever the normal elements can do. I wonder what fun things can be created
-around that effect. Maybe we really need to fill out upside-down forms while birds are bumping into the submit button?
+The funny thing about having DOM nodes flying around is that you can still 
+click, drag, select, submit a form or do whatever the normal elements 
+can do. I wonder what fun things can be created around that effect. 
+Maybe we really need to fill out upside-down forms while birds are 
+bumping into the submit button?
 If you make anything, I'd love to hear about it.
 
 2) BASIC USAGE
 
-Dependencies: heavyboxes.js still uses the version of box2djs which depends on prototypejs.
-Personally I am not a big fan of that and many might agree, but it works for now.
-All other dependencies for the example are in /lib.
+Dependencies: heavyboxes.js still uses the version of box2djs which 
+depends on prototypejs. Personally I am not a big fan of that and many 
+might agree, but it works for now. All other dependencies for the example 
+are in /lib.
 
 // 1: Initialize the physics world inside the world div.
 // This will create a frame of static bodies around the div's boundries 
-// to keep objects from falling outside of the world. The div need a fixed size or the
-// behavior is undefined.
+// to keep objects from falling outside of the world. The div need a 
+// fixed size or the behavior is undefined.
 
 var heavyBoxes = new HeavyBoxes($('world'));
 heavyBoxes.run();
@@ -32,13 +35,16 @@ heavyBoxes.run();
 // 2: create a dom element or tree of elements (don't attach it yet)
 var newDiv = document.createElement("div");
 newContent = document.createTextNode("Hi there and greetings!");
-newDiv.appendChild(newContent); // add the text node to the newly created div.
+// add the text node to the newly created div.
+newDiv.appendChild(newContent); 
 
 // 3: add physics body and add to world/DOM
 // add at position (120, 60) with initial velocity (-10, 0)
 var actor = heavyBoxes.addBox(120, 60, newDiv, -10, 0);
 
-Also check out example1.html for the original implementation of "Twittershitter".
+Also check out example1.html for the original 
+implementation of "Twittershitter".
+
 Enjoy!
 
 
