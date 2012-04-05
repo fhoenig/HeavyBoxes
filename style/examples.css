@@ -1,0 +1,103 @@
+body {
+    margin:0;
+    padding:0;
+    border:0;
+    font-family: sans-serif;
+    background: #333;
+}
+
+.header {
+
+    background: #111;
+    background: -moz-linear-gradient(top,
+                rgba(50, 50, 50, 0.9) 0%,
+                rgba(30, 30, 30, 0.9) 50%,
+                rgba(20, 20, 20, 0.9) 50%,
+                rgba(0, 0, 0, 0.9) 100%);
+    background: -webkit-gradient(linear, 0 0, 0 100%,
+                color-stop(0, rgba(50, 50, 50, 0.9)),
+                color-stop(0.5, rgba(30, 30, 30, 0.9)),
+                color-stop(0.5, rgba(20, 20, 20, 0.9)),
+                color-stop(1, rgba(0, 0, 0, 0.9)));
+    border: 0;
+    -moz-box-shadow: inset 1px 1px 1px 0px rgba(135, 135, 135, 0.1), inset -1px -1px 1px 0px rgba(135, 135, 135, 0.1);
+    -webkit-box-shadow: inset 1px 1px 1px 0px rgba(135, 135, 135, 0.1), inset -1px -1px 1px 0px rgba(135, 135, 135, 0.1);
+    box-shadow: inset 1px 1px 1px 0px rgba(135, 135, 135, 0.1), inset -1px -1px 1px 0px rgba(135, 135, 135, 0.1);
+    color: #aaa;
+    font-size: 22px;
+    font-weight: lighter;
+    line-height: 1;
+    padding: 0;
+    text-shadow: 0px -1px 1px rgba(0, 0, 0, .8), 0 1px 1px rgba(255, 255, 255, 0.3);
+    height: 32px;
+    line-height:32px;
+    text-align:center;
+}
+
+.header h1 {
+    font-size:18px;
+    margin:0;
+}
+
+body .background {
+    margin:0;
+    padding:0;
+    border:0;
+    width:100%;
+    background: #333;
+}
+
+body #world {
+    width: 980px;
+    height: 844px;
+    padding:0;
+    margin: 0 auto;
+    position:relative;
+    border: 3px solid #aaa;
+}
+
+.footer {
+    background-color:#222;
+    color: #4d4d4d;
+    padding:5px 8px 5px 20px;
+    font-size: 12px;
+}
+
+.tweet {
+    height: 80px;
+    width: 135px;
+    font-size: 9px;
+    background-color: #000;
+    border: 1px solid #333;
+    padding: 5px;
+}
+
+.tweet > img.avatar {
+    border:0;
+    width: 48px;
+    height: 48px;
+    float: left;
+    text-align:left;
+    margin-top: 2px;
+}
+
+.tweet > .text {
+    color: #eee;
+    font-weight: normal;
+    text-align:left;  
+    padding:0;
+    border:0;
+    vertical-align:top;
+}
+
+.tweet > .text  a {
+    color: #2276BB;
+    font-weight: bold;
+    text-decoration:none;
+}
+.tweet > .text em {
+    display: block;
+    font-size: 8px;
+    font-style: normal;
+    margin-top: 2px;
+}

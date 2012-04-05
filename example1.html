@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>HeavyBoxes - Example 1</title>
+
+		<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
+		<script type="text/javascript" src="lib/jsonp.js"></script>
+		<script type="text/javascript" src="lib/tmpl.js"></script>
+		<script type="text/javascript" src="lib/timeago.js"></script>
+		<script type="text/javascript" src="lib/box2d.js"></script>
+		<script type="text/javascript" src="app/heavyboxes.js"></script>
+		<script type="text/javascript" src="app/twittershitter.js"></script>
+		<link rel="stylesheet" href="style/examples.css" type="text/css" media="screen" charset="utf-8">
+    </head>   
+    
+	<script type="text/javascript" charset="utf-8">
+	var heavyBoxes = null;
+	var twitterUser = "rianflo";
+
+	Event.observe(window, 'load', function() {
+		// 1: Initialize the physics world inside the world div.
+		// This will create a frame of static bodies around the div's boundries 
+		// to keep objects from falling outside of the world.
+		heavyBoxes = new HeavyBoxes($('world'));            
+		heavyBoxes.run();
+
+		// 2: Set up ajax twitter client
+		var twittershitter = new TwitterShitter();
+		twittershitter.addUser(twitterUser);
+		twittershitter.emit(function(tweet) {
+
+			// 3: limit to 6 tweets in world (browsers are slow, still)
+			if (heavyBoxes.getObjectCount() > 6)
+				return false;
+
+			// 4: On each tweet received create a new DOM structure based on a simple template system
+			tweet.human_time = DateHelper.time_ago_in_words(new Date(tweet.created_at));
+			var tweetBox = tmpl($('tmpl-tweet').value, tweet);
+
+			// 5: add a physics body to this DOM node
+			var actor = heavyBoxes.addBox(720, 60, tweetBox, -(1.0/(tweet.text.length/140) * (Math.random()/10+0.2)), 0);
+
+			// 6: we'll remove them after 1 minute so that new ones can come in.
+			setTimeout(function(){ actor.elem.remove(); }, 60000);
+				return true;
+		}, 6);
+
+		Event.observe($('stopButton'), 'click', function(e){
+			heavyBoxes.stop();
+			twittershitter.stop();
+			$('stopButton').textContent = "reload page to restart";
+		});
+	});
+	</script>
+
+	<body class="laundry">
+		<div class="header">
+			<h1>Example 1 - TwitterShitter</h1>
+		</div>
+		<div class="background">
+			<div id="world">
+			</div>
+			<div class="footer">Copyright &copy; 2012 - Florian Hoenig<span id="stopButton" style="float:right; cursor:pointer;">Stop Scripts!</span></div>
+		</div>
+
+		<!-- templates -->
+		<textarea id="tmpl-tweet" class="template" style="display:none">
+			<div id="tweet-id-<%=id_str%>" class="tweet">
+				<div class="text">
+					<a class="user" href="http://twitter.com/<%=user.screen_name%>" target="_blank"><%=user.name%></a>
+					<%=text%>
+					<em>
+						<a href="http://twitter.com/<%=user.screen_name%>/status/<%=id_str%>" time="<%=created_at%>" class="timestamp" target="_blank"><%=human_time%></a>·
+						<a href="http://twitter.com/?status=@<%=user.screen_name%>%20&amp;in_reply_to_status_id=<%=id_str%>&amp;in_reply_to=<%=user.screen_name%>" class="reply" target="_blank">reply</a>
+					</em>
+				</div>
+			</div>
+		</textarea>
+	</body>
+</html>
+
